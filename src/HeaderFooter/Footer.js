@@ -4,7 +4,7 @@ class Footer extends React.Component {
     render() {
         return (
             <div class="card-footer text-muted">
-                © 2020: Web Development Project
+                © 2020: Web Development Project TEST
                 
             </div>
         );
