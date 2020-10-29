@@ -1,4 +1,5 @@
 import React from 'react'
+import { Table } from 'react-bootstrap';
 
 //Creates a react component "Datatable" which takes our data state as its prop argument
 export default function Datatable({ data }) {
@@ -7,7 +8,7 @@ export default function Datatable({ data }) {
     return (
         //Defines the amount of cell Padding and cell Spacing and creates our table header and table body. The keys are mapped to the header and the
         //data to the table body
-        <table cellPadding={0} cellSpacing={0}>
+        <Table>
             <thead>
                  <tr>{data[0] && columns.map((heading) =><th>{heading}</th>)}</tr>
             </thead>
@@ -16,9 +17,8 @@ export default function Datatable({ data }) {
                     {
                         columns.map(column => <td>{row[column]}</td>)
                     }
-
                 </tr>)}
             </tbody>
-        </table>
+        </Table>
     ); 
 }
