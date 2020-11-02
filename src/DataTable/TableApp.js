@@ -1,5 +1,5 @@
 // List of imports
-import React , { useState, useEffect } from 'react'
+import React , { useMemo, useState, useEffect } from 'react'
 import axios from 'axios'
 import Datatable from './datatable'
 
@@ -17,44 +17,33 @@ auth: {
  },
 data: {
   //Specify your query here
-  "query": "select last price by sym from trade where time.date =.z.d",
+  "query": "select price:last price, diff:last(deltas(price)) by sym from trade where time.date =.z.d",
   "type": "sync",
   "response": true
   } 
 } 
 
-//{window.location.reload(false);}
-//Axios finds the output from your QRest query and logs it in the console to allow for checking that the output is what you expect
-axios(options)
-  .then(response => {
-    console.log(response);
-  })
-
 //defines our App function, everything inside this can be rendered
 export default function App() {
   //Defines two states: Our data state and our q state, useState requires two arguments;the name of the state and the change state function, 
   //I've called these "data" and "setData". It also requires a default value so I've just given it an empty array
-  const [data, setData] = useState([])
+  const [data, setData] = useState([]);
   //The q state allows us to filter with the search bar, I've given it a default value of an empty string
-  const [q, setQ] = useState("")
+  const [q, setQ] = useState("");
  //Use effect allows us to map the results from our qRest query into our data state. The options constant parameter is defined at the top containing
  //all our qRest information. The p => p means that each member of our array is mapped to the state.
- 
- //useEffect(() => {
-  // axios(options).then(res => {
-   // setData(res.data.result.map(p => p))
-    
- // })
- //}, []);
   useEffect(() => {
     const timer = setInterval(() => {
       axios(options).then(res => {
         setData(res.data.result.map(p => p))
-      })
-    },1000);
+      }).catch(error => alert('Disconnected from API'))
+    },1000)
+    ;
+  
               //clearing interval
     return () => clearInterval(timer);
   });
+
 //This function is related to the search bar. The .LowerCase functions allow for queries in the search bar to be case insensitive. The row.sym ensures
 //That only the sym is being filtered
  function search(rows) {
@@ -72,4 +61,4 @@ export default function App() {
     </div>
   );
 }
-//{window.location.reload(false);}
+
