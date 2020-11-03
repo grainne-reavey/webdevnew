@@ -188,7 +188,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 // Exporting everthing
-export default function EnhancedTable( {data} ) {
+export default function EnhancedTable( {tableData} ) {
   const classes = useStyles();
   const [order, setOrder] = React.useState('asc');
   const [orderBy, setOrderBy] = React.useState('sym');
@@ -229,10 +229,10 @@ export default function EnhancedTable( {data} ) {
               order={order}
               orderBy={orderBy}
               onRequestSort={handleRequestSort}
-              rowCount={data.length}
+              rowCount={tableData.length}
             />
             <TableBody>
-              {stableSort(data, getComparator(order, orderBy))
+              {stableSort(tableData, getComparator(order, orderBy))
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map((row, index) => {
                 
@@ -258,7 +258,7 @@ export default function EnhancedTable( {data} ) {
         <TablePagination
           rowsPerPageOptions={[5, 10]}
           component="div"
-          count={data.length}
+          count={tableData.length}
           rowsPerPage={rowsPerPage}
           page={page}
           onChangePage={handleChangePage}
