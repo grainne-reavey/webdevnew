@@ -13,7 +13,7 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import Paper from '@material-ui/core/Paper';
 
-
+// Create dummy data
 function createData( dir, sym, closeprice, openprice, max, maxtime, min, mintime) {
   return { dir, sym, closeprice, openprice, max, maxtime, min, mintime };
 }
@@ -32,6 +32,7 @@ const rows = [
   createData(' ', 'MSFT', 20.91, 24.7, 31.96, 15.34, 18.95, 15.33),
 ];
 
+// Potential dummy data for yesterday and ereyesterday 
 const rows2 = [
   createData('APPL', 200, 200, 200, 200, 200, 200),
   createData('AIG', 200, 200, 200, 200, 200, 200),
@@ -58,7 +59,7 @@ const rows3 = [
   createData('MSFT', 400, 400, 400, 400, 400, 400),
 ];
 
-// Ording functions
+// Lots of ordering functions
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
     return -1;
@@ -85,7 +86,7 @@ function stableSort(array, comparator) {
   return stabilizedThis.map((el) => el[0]);
 }
 
-// Setting column (headCells) constants
+// Setting column (headCells) constants and ids
 const headCells = [
   { id: 'dir', numeric: false, label: ' ' },
   { id: 'sym', numeric: false, label: 'SYM' },
@@ -97,7 +98,7 @@ const headCells = [
   { id: 'mintime', numeric: true, label: 'Min Time' },
 ];
 
-// Making function to set ordering buttons with in headCells 
+// Setting ordering buttons within headCell headings
 function EnhancedTableHead(props) {
   const { classes, order, orderBy, onRequestSort } = props;
   const createSortHandler = (property) => (event) => {
@@ -159,6 +160,7 @@ const useToolbarStyles = makeStyles((theme) => ({
   },
 }));
 
+// Collecting dates for dropdown menu
 var options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
 var today  = new Date();
 var yesterday  = new Date(today);
@@ -166,7 +168,7 @@ yesterday.setDate(yesterday.getDate() - 1)
 var ereyesterday  = new Date(yesterday);
 ereyesterday.setDate(ereyesterday.getDate() - 1)
 
-// Implementing the header
+// Implementing the header including dropdown 
 const EnhancedTableToolbar = (props) => {
   const classes = useToolbarStyles();
   return (
@@ -214,22 +216,23 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-// Exporting everthing
+// Exporting everything
 export default function EnhancedTable() {
   const classes = useStyles();
   const [order, setOrder] = React.useState('asc');
-  const [orderBy, setOrderBy] = React.useState('calories');
+  const [orderBy, setOrderBy] = React.useState('sym');
   const [selected] = React.useState([]);
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
   
+  // Sorting
   const handleRequestSort = (event, property) => {
     const isAsc = orderBy === property && order === 'asc';
     setOrder(isAsc ? 'desc' : 'asc');
     setOrderBy(property);
   };
 
-  // Constants for rows per page feature
+  // Rows per page feature
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
   };
