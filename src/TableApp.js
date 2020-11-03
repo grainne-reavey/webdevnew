@@ -3,7 +3,8 @@ import React , { useMemo, useState, useEffect } from 'react'
 import axios from 'axios'
 import Datatable from './datatable'
 import Tableslist from './Tableslist'
-
+import AveragePrice from './Graphs/AveragePrice';
+import Volatility from './Graphs/Volatility';
 /**
  * Make Axios based request.
  * @param method - defaults to 'get'
@@ -88,19 +89,49 @@ export default function App() {
  }
 
  console.log(tableData)
+
+ /*
 //This defines what we return on the screen. The input line creates a search bar and the <Datatable data={data} />  line displays the Datatable component
   return (
-    <div>
-      <div>
+    <div class="w-100 p-10">
+      <div class="row">
         <input type="text" value={q} onChange={(e) => setQ(e.target.value)}/> 
       </div>
       <div>
         {/*<Datatable 
         data={search(data)}
-        />*/}
+        />
         <Tableslist tableData={search (tableData)}/>
       </div>
     </div>
+  );
+}
+*/
+return (
+    <div class="w-100 p-10">
+      <div class="row">
+        <div class="w-10 p-5"></div>
+        <div class="col">
+          <AveragePrice />
+        </div>
+        <div class="w-30 p-5"></div>
+        <div class="col">
+          <Volatility />
+        </div>
+        <div class="col-1"></div>
+      </div>
+      <div class="space-box"></div>
+      <div class="row">
+        <div class="col-1"></div>
+        <div class="col">
+          <Tableslist tableData={tableData} />
+        </div>
+        <div class="col-1"></div>
+      </div>
+    </div>
+
+
+
   );
 }
 
