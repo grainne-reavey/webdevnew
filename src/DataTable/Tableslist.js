@@ -13,6 +13,40 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import Paper from '@material-ui/core/Paper';
 import './datatable/index.css';
+import axios from 'axios'
+
+/**
+ * Make Axios based request.
+ * @param method - defaults to 'get'
+ * @param [data] - optional
+ * @param url
+ * @param additionalHeaders
+ * @param rest - optional. Additional properties to pass into request config
+ * @returns {Promise<any>}
+ */
+const makeRequest = ({
+  data,
+  method = 'get',
+  url,
+  headers = {},
+  auth,
+  ...rest
+}) => {
+  const config = {
+    ...(data ? { data } : {}), // Do not add 'data' if undefined.
+    method,
+    url,
+    headers,
+    auth,
+    ...rest,
+  };
+  return new Promise((resolve, reject) => {
+    axios.request(config)
+      .then(response => resolve(response))
+      .catch(error => console.log(error));
+  });
+};
+
 
 // Ording functions
 function descendingComparator(a, b, orderBy) {
@@ -166,7 +200,47 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 // Exporting everthing
-export default function EnhancedTable( {tableData} ) {
+export default function EnhancedTable() {
+  const [tableData, setTableData] = useState([]);
+  //The q state allows us to filter with the search bar, I've given it a default value of an empty string
+  const [q, setQ] = useState("");
+ //Use effect allows us to map the results from our qRest query into our data state. The options constant parameter is defined at the top containing
+ //all our qRest information. The p => p means that each member of our array is mapped to the state.
+ const processRequest = async setTableData => {
+  const { data } = await makeRequest({
+    url: 'https://81.150.99.19:8037/executeQuery',
+    method: 'POST',
+    headers: {
+      "Accept": "*/*",
+      "Authorization": "BASIC dXNlcjpwYXNz"
+    },
+    auth: {
+      username: 'user',
+      password: 'pass'
+    },
+    data: {
+      //Specify your query here
+      "query": "select price:last price, diff:last(deltas(price)) by sym from trade where time.date =.z.d",
+      "type": "sync",
+      "response": true
+    }
+  });
+  setTableData(data.result);
+  console.log(data);
+} 
+
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      processRequest(setTableData)
+    .catch(error => alert('Disconnected from API'))
+    ;
+  },1000);
+
+
+  return () => clearInterval(timer);
+  });
+
   const classes = useStyles();
   const [order, setOrder] = React.useState('asc');
   const [orderBy, setOrderBy] = React.useState('sym');
