@@ -14,28 +14,6 @@ import Typography from '@material-ui/core/Typography';
 import Paper from '@material-ui/core/Paper';
 import './datatable/index.css';
 
-const styles = theme => ({
-  root: {
-    width: "100%",
-    marginTop: theme.spacing.unit * 3,
-    overflowX: "auto"
-  },
-  table: {
-    minWidth: 700
-  },
-  tableRow: {
-    "&$hover:hover": {
-      backgroundColor: "blue"
-    }
-  },
-  tableCell: {
-    "$hover:hover &": {
-      color: "pink"
-    }
-  },
-  hover: {}
-});
-
 // Ording functions
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
@@ -194,7 +172,7 @@ export default function EnhancedTable( {tableData} ) {
   const [orderBy, setOrderBy] = React.useState('sym');
   const [selected] = React.useState([]);
   const [page, setPage] = React.useState(0);
-  const [rowsPerPage, setRowsPerPage] = React.useState(5);
+  const [rowsPerPage, setRowsPerPage] = React.useState(10);
   
   const handleRequestSort = (event, property) => {
     const isAsc = orderBy === property && order === 'asc';
