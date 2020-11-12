@@ -4,7 +4,6 @@ import TimeSeries from "fusioncharts/fusioncharts.timeseries";
 import ReactFC from 'react-fusioncharts';
 import axios from 'axios'
 import FusionTheme from 'fusioncharts/themes/fusioncharts.theme.candy';
-import './index.css'
 
 ReactFC.fcRoot(FusionCharts, TimeSeries, FusionTheme);
 
@@ -45,9 +44,9 @@ const options1 = {
     "response": true
   }
 }
+
 let values = [];
 const jsonify = res => res.json();
-
 const dataFetch =
   axios(options)
     .then(response => {
@@ -65,7 +64,7 @@ const schema = [{
   "name": "Price",
   "type": "number",
   format: {
-    prefix: "£",
+    prefix: "",
     round: "2"
   }
 }];
@@ -77,7 +76,7 @@ const dataSource = {
     theme: "fusion"
   },
   // caption: {
-  //   text: "Running Average Price"
+  //   text: "Running Average Price By Sym"
   // },
   subcaption: {
     text: ""
@@ -90,13 +89,18 @@ const dataSource = {
         connectnulldata: true,
       }
       ],
-      title: "USD",
+      title: "USD($)",
       format: {
         prefix: "",
         round: "2"
       }
     }
-  ]
+  ],
+  "extensions": {
+    "customRangeSelector": {
+      "enabled": "0"
+    }
+  }
 }
 
 export default class ChartViewer extends React.Component {
@@ -110,8 +114,8 @@ export default class ChartViewer extends React.Component {
         id: "mychart",
         type: "timeseries",
         renderAt: "container",
-        width: "600",
-        height: "600",
+        width: "800",
+        height: "500",
         dataSource
       }
     };
@@ -136,10 +140,9 @@ export default class ChartViewer extends React.Component {
       var fusionTable = new FusionCharts.DataStore().createDataTable(
         data,
         schema
-        
-        );
-        
-        setInterval(async () => {
+      );
+
+      setInterval(async () => {
         let chartRef = FusionCharts("mychart")
         await axios(options1)
           .then(response => {
@@ -163,6 +166,7 @@ export default class ChartViewer extends React.Component {
   render() {
     return (
       <div class="box effect7" align="center">
+        <hr/>
         <h4>Running Average Price</h4>
         <hr />
         {this.state.timeseriesDs.dataSource.data ? (

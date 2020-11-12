@@ -55,7 +55,7 @@ function TodayApp() {
       },
       data: {
         // "query": "select price:last price, diff:last(deltas(price)), maxp:max price, minp:min price by sym from trade where time.date =.z.d",
-        "query": "t:select price:last price, diff:last (deltas(price)), maxp: last max price, maxt: last string time where price=max price, minp: last min price, mint: last string time where price = min price by sym from trade where time.date=.z.d;q:select volume:last sum bsize+ last sum asize by sym from quote where time.date=.z.d; aj[`sym;t;q]",
+        "query": "t:select price:last price, diff:last (deltas(price)), maxp: last max price, maxt: last string time where price=max price, minp: last min price, mint: last string time where price = min price by sym from trade where time.date=.z.d;q:select volume:sum bsize+ asize by sym from quote where time.date=.z.d; aj[`sym;t;q]",
         // "query": "select price:last price, diff:last (deltas(price)), maxp: last max price, maxt: last string time where price=max price, minp: last min price, mint: last string time where price = min price by sym from trade where time.date=.z.d",
         "type": "sync",
         "response": true

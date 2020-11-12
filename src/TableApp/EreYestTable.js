@@ -222,10 +222,10 @@ function stableSort(array, comparator) {
 
 const headCellSort = [
   { id: 'sym', numeric: false, label: 'SYM' },
-  { id: 'eyoprice', numeric: true, label: 'Open Price' },
-  { id: 'eycprice', numeric: true, label: 'Close Price' },
-  { id: 'eymaxp', numeric: true, label: 'Max Price' },
-  { id: 'eyminp', numeric: true, label: 'Min Price' },
+  { id: 'eyoprice', numeric: true, label: 'Open' },
+  { id: 'eycprice', numeric: true, label: 'Close' },
+  { id: 'eymaxp', numeric: true, label: 'High' },
+  { id: 'eyminp', numeric: true, label: 'Low' },
 ];
 
 const headCellOne = [
@@ -325,37 +325,49 @@ export default function EreYestEnhancedTable({ data }) {
       <TableContainer>
         <Table className={classes.table} aria-labelledby="tableTitle" size={'medium'} aria-label="enhanced table">
           <EnhancedTableHead classes={classes} numSelected={selected.length} order={order} orderBy={orderBy} onRequestSort={handleRequestSort} rowCount={data.length} />
-          <TableBody>{stableSort(data, getComparator(order, orderBy)).slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row, index) => {
-            return (
-              <TableRow>
-                <TableCell align="right">{row.sym}</TableCell>
-                <TableCell align="right">${row.eyoprice.toFixed(2)}</TableCell>
-                <TableCell align="right">${row.eycprice.toFixed(2)}</TableCell>
-                <TableCell align="right">${row.eymaxp.toFixed(2)}</TableCell>
-                <TableCell align="right">${row.eyminp.toFixed(2)}</TableCell>
-                {(row.eyoprice - row.eycprice) < 0 ? (
-                  <TableCell align="right">
-                    <svg width="25" height="25" viewBox="0 0 16 16" class="bi bi-caret-down-fill" fill="red" xmlns="http://www.w3.org/2000/svg">
-                      <path d="M7.247 11.14L2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z" />
-                    </svg></TableCell>
-                ) : null}
-                {(row.eyoprice - row.eycprice) > 0 ? (
-                  <TableCell align="right">
-                    <svg width="25" height="25" viewBox="0 0 16 16" class="bi bi-caret-up-fill" fill="green" xmlns="http://www.w3.org/2000/svg">
-                      <path d="M7.247 4.86l-4.796 5.481c-.566.647-.106 1.659.753 1.659h9.592a1 1 0 0 0 .753-1.659l-4.796-5.48a1 1 0 0 0-1.506 0z" />
-                    </svg></TableCell>
-                ) : null}
-                {(row.eyoprice - row.eycprice) == 0 ? (
-                  <TableCell align="right">
-                    <svg width="25" height="25" viewBox="0 0 16 16" class="bi bi-dash" fill="grey" xmlns="http://www.w3.org/2000/svg">
-                      <path d="M4 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 4 8z" />
-                    </svg></TableCell>
-                ) : null}
+          {(data.length > 0) ? (
+            <TableBody>{stableSort(data, getComparator(order, orderBy)).slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row, index) => {
+              return (
+                <TableRow>
+                  <TableCell align="right">{row.sym}</TableCell>
+                  <TableCell align="right">${row.eyoprice.toFixed(2)}</TableCell>
+                  <TableCell align="right">${row.eycprice.toFixed(2)}</TableCell>
+                  <TableCell align="right">${row.eymaxp.toFixed(2)}</TableCell>
+                  <TableCell align="right">${row.eyminp.toFixed(2)}</TableCell>
+                  {(row.eyoprice - row.eycprice) > 0 ? (
+                    <TableCell align="right">
+                      <svg width="25" height="25" viewBox="0 0 16 16" class="bi bi-caret-down-fill" fill="red" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M7.247 11.14L2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z" />
+                      </svg></TableCell>
+                  ) : null}
+                  {(row.eyoprice - row.eycprice) < 0 ? (
+                    <TableCell align="right">
+                      <svg width="25" height="25" viewBox="0 0 16 16" class="bi bi-caret-up-fill" fill="green" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M7.247 4.86l-4.796 5.481c-.566.647-.106 1.659.753 1.659h9.592a1 1 0 0 0 .753-1.659l-4.796-5.48a1 1 0 0 0-1.506 0z" />
+                      </svg></TableCell>
+                  ) : null}
+                  {(row.eyoprice - row.eycprice) == 0 ? (
+                    <TableCell align="right">
+                      <svg width="25" height="25" viewBox="0 0 16 16" class="bi bi-dash" fill="grey" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M4 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 4 8z" />
+                      </svg></TableCell>
+                  ) : null}
+                  <TableCell></TableCell>
+                </TableRow>
+              );
+            })}
+            </TableBody>
+          ) : (
+              <TableBody>
                 <TableCell></TableCell>
-              </TableRow>
-            );
-          })}
-          </TableBody>
+                <TableCell></TableCell>
+                <TableCell></TableCell>
+                <TableCell><h5>Loading...</h5></TableCell>
+                <TableCell> </TableCell>
+                <TableCell> </TableCell>
+                <TableCell></TableCell>
+              </TableBody>
+            )}
         </Table>
       </TableContainer>
       <TablePagination rowsPerPageOptions={[5, 10]} component="div" count={data.length} rowsPerPage={rowsPerPage} page={page} onChangePage={handleChangePage} onChangeRowsPerPage={handleChangeRowsPerPage} />
