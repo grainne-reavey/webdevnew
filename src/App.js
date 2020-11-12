@@ -53,7 +53,7 @@ class App extends React.Component {
         </div>
         <div class="space-box"></div>
         <div class="row">
-          <div class="col-3"></div>
+          <div class="col"></div>
           <div class="col">
             <div class="col"></div>
             <div align="center">
@@ -61,7 +61,7 @@ class App extends React.Component {
             </div>
             <div class="col"></div>
           </div>
-          <div class="col-3"></div>
+          <div class="col"></div>
         </div>
         <div class="space-box"></div>
         <div class="row">
