@@ -9,7 +9,7 @@ import './index.css'
 ReactFC.fcRoot(FusionCharts, TimeSeries, FusionTheme);
 
 const options = {
-  url: 'https://81.150.99.19:8037/executeQuery',
+  url: 'https://81.150.99.19:8038/executeQuery',
   method: 'POST',
   headers: {
     "Accept": "*/*",
@@ -21,13 +21,14 @@ const options = {
   },
   data: {
     //Specify your query here
-    "query": " raze each select Array,Avp from select Array:(last time,'last sym), Avp:(last(sums price))%last sums count each sym by sym, 1 xbar time.minute from trade where time.date=.z.d",
+    "query": "raze each select last time,symbol:last sym,last rAvp by sym,1 xbar time.minute from trade",
     "type": "sync",
     "response": true
   }
 }
+
 const options1 = {
-  url: 'https://81.150.99.19:8037/executeQuery',
+  url: 'https://81.150.99.19:8038/executeQuery',
   method: 'POST',
   headers: {
     "Accept": "*/*",
@@ -39,17 +40,18 @@ const options1 = {
   },
   data: {
     //Specify your query here
-    "query": " raze each select Array,Avp from select Array:(last time,'last sym), Avp:(last(sums price))%last sums count each sym by sym from trade where time.date=.z.d",
+    "query": " raze each select time,sym,rAvp from Avp",
     "type": "sync",
     "response": true
   }
 }
 let values = [];
 const jsonify = res => res.json();
+
 const dataFetch =
   axios(options)
     .then(response => {
-      return (response.data.result)
+      return (response.data.result.y)
     });
 
 const schema = [{
@@ -83,7 +85,11 @@ const dataSource = {
   series: "Type",
   yaxis: [
     {
-      plot: "Price",
+      plot: [{
+        value: "Price",
+        connectnulldata: true,
+      }
+      ],
       title: "USD",
       format: {
         prefix: "",
@@ -104,7 +110,7 @@ export default class ChartViewer extends React.Component {
         id: "mychart",
         type: "timeseries",
         renderAt: "container",
-        width: "700",
+        width: "600",
         height: "600",
         dataSource
       }
@@ -122,21 +128,25 @@ export default class ChartViewer extends React.Component {
       chart: e.sender
     });
   }
-  onFetchData() {
-    Promise.all([dataFetch, schema]).then(res => {
+
+  async onFetchData() {
+    await Promise.all([dataFetch, schema]).then(res => {
       const data = res[0];
       const schema = res[1];
       var fusionTable = new FusionCharts.DataStore().createDataTable(
         data,
         schema
-      );
-      setInterval(() => {
+        
+        );
+        
+        setInterval(async () => {
         let chartRef = FusionCharts("mychart")
-        axios(options1)
+        await axios(options1)
           .then(response => {
             chartRef.feedData(response.data.result);
           });
-      }, 60000);
+      }, 5000);
+
       const timeseriesDs = Object.assign({}, this.state.timeseriesDs);
       timeseriesDs.dataSource.data = fusionTable;
       this.setState({

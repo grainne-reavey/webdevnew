@@ -4,6 +4,8 @@ import TimeSeries from "fusioncharts/fusioncharts.timeseries";
 import ReactFC from 'react-fusioncharts';
 import axios from 'axios'
 import FusionTheme from 'fusioncharts/themes/fusioncharts.theme.candy';
+import './index.css'
+
 ReactFC.fcRoot(FusionCharts, TimeSeries, FusionTheme);
 const options = {
     url: 'https://81.150.99.19:8037/executeQuery',
@@ -108,7 +110,7 @@ export default class Volatility extends React.Component {
                 id: "mychart2",
                 type: "timeseries",
                 renderAt: "container",
-                width: "700",
+                width: "600",
                 height: "600",
                 dataSource
             }
