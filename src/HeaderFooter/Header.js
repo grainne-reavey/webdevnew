@@ -5,10 +5,12 @@ class Header extends React.Component {
   render() {
     return (
       <div>
-      <nav class="navbar navbar-dark bg-dark">
-        <span class="navbar-brand">Web Development Project</span>
-      </nav>
-      <div class = "space-box"></div>
+        <nav class="navbar navbar-dark bg-dark">
+          <div class="row">
+            <div class="col"></div>
+            <div class="navbar-brand"><h3>q-Netic Dashboard</h3></div>
+          </div>
+        </nav>
       </div>
     );
   }

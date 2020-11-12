@@ -1,0 +1,61 @@
+
+  
+ 
+  
+  /* remove border radius for the tab */
+  
+  #exTab1 .nav-pills > li > a {
+    border-radius: 0;
+  }
+
+
+  ul {
+    display: table;
+    table-layout: fixed;
+    width: 100%;
+}
+
+li {
+    display: table-cell;
+}
+ 
+.DailyChange{
+  padding:0 !important;
+  margin-left: 1px;
+  width:130px
+}
+
+.Arrows{
+  /* padding-right:20 !important;
+  margin-right: 100px; */
+  padding-top: 50px;
+  padding-right: 500px;
+  padding-bottom: 50px;
+  padding-left: 1px;
+  
+}
+
+.effect7{
+  position:relative;
+  box-shadow:0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) ;
+}
+
+.ExtraColumn{
+  width:30px
+}
+
+.MuiPaper-root.MuiMenu-paper.MuiPopover-paper.MuiPaper-elevation8.MuiPaper-rounded {
+  width:10px
+}
+
+.MuiTableCell-root {
+  width:10;
+}
+
+
+
+
+
+  
+  
+  
