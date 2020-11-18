@@ -58,6 +58,10 @@ li {
   margin-top:20px;
   width:100%;
 }
+
+.divLoading{
+  padding-top:10px
+}
 .effect7{
   position:relative;
   box-shadow:0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) ;

@@ -435,7 +435,8 @@ export default function TodayEnhancedTable({ data }) {
                 <TableCell></TableCell>
                 <TableCell></TableCell>
                 <TableCell></TableCell>
-                <TableCell><h5>Loading...</h5></TableCell>
+                <TableCell></TableCell>
+                <TableCell><div className="divLoading"><h5>Loading...</h5></div></TableCell>
                 <TableCell> </TableCell>
                 <TableCell> </TableCell>
                 <TableCell></TableCell>

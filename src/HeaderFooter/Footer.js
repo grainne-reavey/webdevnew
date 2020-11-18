@@ -6,7 +6,7 @@ class Footer extends React.Component {
             <div class="card-footer text-center text-muted">
                  <img src={require('./logoQ-Netic1.png')} width="100" ></img>
                  <div></div>
-                © 2020: q-Netic Dashboard
+                © 2020 Q-Netic
             </div>
         );
     }
