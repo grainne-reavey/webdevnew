@@ -1,9 +1,15 @@
-.effect7
+
+.box{
+  width:100%;
+}
+
+.div.box.effect7
 {
   position:relative;
     box-shadow:0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) ;
     padding-top:15px;
     padding-left:15px;
     padding-right:15px;
-    padding-bottom:15px
+    padding-bottom:15px;
+    width:100%
 }

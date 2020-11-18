@@ -222,10 +222,10 @@ function stableSort(array, comparator) {
 
 const headCellSort = [
   { id: 'sym', numeric: false, label: 'SYM' },
-  { id: 'eyoprice', numeric: true, label: 'Open' },
-  { id: 'eycprice', numeric: true, label: 'Close' },
-  { id: 'eymaxp', numeric: true, label: 'High' },
-  { id: 'eyminp', numeric: true, label: 'Low' },
+  { id: 'eyoprice', numeric: true, label: 'Open ($)' },
+  { id: 'eycprice', numeric: true, label: 'Close ($)' },
+  { id: 'eymaxp', numeric: true, label: 'High ($)' },
+  { id: 'eyminp', numeric: true, label: 'Low ($)' },
 ];
 
 const headCellOne = [
@@ -239,13 +239,14 @@ function EnhancedTableHead(props) {
   };
 
   return (
-    <TableHead>
+    <TableHead className="table3">
       <TableRow>
         {headCellSort.map((headCell) => (
           <TableCell
             key={headCell.id}
             align={'right'}
             padding={'default'}
+            className={"table3"}
           >
             <TableSortLabel
               active={orderBy === headCell.id}
@@ -330,10 +331,10 @@ export default function EreYestEnhancedTable({ data }) {
               return (
                 <TableRow>
                   <TableCell align="right">{row.sym}</TableCell>
-                  <TableCell align="right">${row.eyoprice.toFixed(2)}</TableCell>
-                  <TableCell align="right">${row.eycprice.toFixed(2)}</TableCell>
-                  <TableCell align="right">${row.eymaxp.toFixed(2)}</TableCell>
-                  <TableCell align="right">${row.eyminp.toFixed(2)}</TableCell>
+                  <TableCell align="right">{row.eyoprice.toFixed(2)}</TableCell>
+                  <TableCell align="right">{row.eycprice.toFixed(2)}</TableCell>
+                  <TableCell align="right">{row.eymaxp.toFixed(2)}</TableCell>
+                  <TableCell align="right">{row.eyminp.toFixed(2)}</TableCell>
                   {(row.eyoprice - row.eycprice) > 0 ? (
                     <TableCell align="right">
                       <svg width="25" height="25" viewBox="0 0 16 16" class="bi bi-caret-down-fill" fill="red" xmlns="http://www.w3.org/2000/svg">

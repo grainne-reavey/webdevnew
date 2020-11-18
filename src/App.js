@@ -41,27 +41,25 @@ class App extends React.Component {
 
       <div>
         <div class="space-box"></div>
-        <div class="row">
-          <div class="col-1"></div>
-          <div class="col-5" align="center">
+        <div class="row graphRow">
+          <div class="col" align="center">
             <ChartViewer/>
           </div>
-          <div class="col-5" align="center">
+          <div class="col" align="center">
             <Volatility />
           </div>
-          <div class="col-1"></div>
         </div>
         <div class="space-box"></div>
         <div class="row">
-          <div class="col"></div>
+          {/* <div class="col"></div> */}
           <div class="col">
-            <div class="col"></div>
+            {/* <div class="col"></div> */}
             <div align="center">
               <AllTable />
             </div>
-            <div class="col"></div>
+            {/* <div class="col"></div> */}
           </div>
-          <div class="col"></div>
+          {/* <div class="col"></div> */}
         </div>
         <div class="space-box"></div>
         <div class="row">

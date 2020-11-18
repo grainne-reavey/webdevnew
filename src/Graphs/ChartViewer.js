@@ -73,7 +73,7 @@ const dataSource = {
   chart: {
     "decimals": "0",
     exportenabled: true,
-    theme: "fusion"
+    theme: "fusion",
   },
   // caption: {
   //   text: "Running Average Price By Sym"

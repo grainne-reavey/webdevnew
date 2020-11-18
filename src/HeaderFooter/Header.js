@@ -3,15 +3,16 @@ import './CSS.css';
 
 class Header extends React.Component {
   render() {
+
     return (
-      <div>
-        <nav class="navbar navbar-dark bg-dark">
-          <div class="row">
-            <div class="col"></div>
-            <div class="navbar-brand"><h3>q-Netic Dashboard</h3></div>
-          </div>
-        </nav>
-      </div>
+<nav class="navbar navbar-expand-sm navbar-custom">
+    <div class="mx-auto d-sm-flex d-block flex-sm-nowrap">
+      <div class = "row">
+        <img src={require('./logoQ-Netic1.png')} width="200" ></img>
+        {/* <a class="navbar-brand" href="#"><h3> Dashboard</h3></a> */}
+        </div>
+    </div>
+</nav>
     );
   }
 }

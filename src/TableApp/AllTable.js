@@ -227,7 +227,9 @@ function EreYestApp() {
 export default function AllTable() {
 
   return (
-    <div class="effect7">
+    <div class ="row">
+      <div class="col-1"></div>
+    <div class="col effect7" align="center">
       <Paper>
         <div>
           <ul class="nav nav-tabs">
@@ -235,25 +237,36 @@ export default function AllTable() {
             <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#1menu1">{yesterday.toLocaleDateString(options)} </a></li>
             <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#1menu2">{ereyesterday.toLocaleDateString(options)} </a></li>
           </ul>
-          <div class="tab-content" width="100%">
-            <div class="tab-pane container active" id="1home">
-              <h3></h3>
+          <div class="tab-content" width="100%" align="center">
+            <div class="tab-pane container active table1" id="1home" align="center">
+      
+              <div class="row" className="rowTitleTable1">
+                <div clas="col-8"></div>
+              <div class="col" align="center">
+              <h1></h1>
               <h4>Table Data - Today </h4>
+              </div>
+              <div clas="col"></div>
+              </div>
               <TodayApp />
             </div>
-            <div class="tab-pane container fade" id="1menu1">
-              <h3></h3>
+            <div class="tab-pane container fade table2" id="1menu1">
+            <div class="row" className="rowTitleTable">
               <h4>Table Data - {yesterday.toLocaleDateString(options)} </h4>
+              </div>
               <YestApp />
             </div>
             <div class="tab-pane container fade" id="1menu2">
-              <h3></h3>
+            <div class="row" className="rowTitleTable">
               <h4>Table Data - {ereyesterday.toLocaleDateString(options)}</h4>
+              </div>
               <EreYestApp />
             </div>
           </div>
         </div>
       </Paper>
+    </div>
+    <div class="col-1"></div>
     </div>
   );
 }

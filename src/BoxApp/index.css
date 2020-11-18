@@ -61,3 +61,73 @@
     div.lastUpdated{
       colour:grey
     }
+
+    .tableformat {
+        table-layout: fixed;
+        width: 100%;
+        white-space: nowrap;
+        
+    
+    }
+
+    .table{
+      margin-bottom:0rem;
+    }
+   
+    .row_today1 {
+      width: 25%;
+      padding-bottom:0px;
+    }
+    .row_today2 {
+      width: 25%;
+      padding-bottom:0px;
+    }
+    .row_today3 {
+      width: 25%;
+      padding-bottom:0px;
+    }
+    .row_today4 {
+      width: 25%;
+      padding-bottom:0px;
+    }
+
+    .effect7
+{
+  position:relative;
+    box-shadow:0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) ;
+    padding-top:15px;
+    padding-left:15px;
+    padding-right:15px;
+    padding-bottom:15px
+}
+
+.lastUpdated {
+  padding-top:20px;
+}
+
+hr.hrBoxTable {
+  margin-top: 0em;
+   margin-bottom: 0em;
+   border-width: 2px;
+}
+
+table.table {
+  width: 100%;
+  margin-bottom: 0rem; 
+  color: #212529;
+  padding-bottom:0px;
+}
+
+.tooltip {
+	position: absolute;
+	top: 40px;
+        font-size: 40px;
+	left: 0px;
+	display: block;
+	width: 250px;
+	color: black;
+	background-color: #FFFF40;
+	border: 1px solid black;
+	padding: 5px;
+}
+    

@@ -233,10 +233,10 @@ function stableSort(array, comparator) {
 
 const headCellSort = [
   { id: 'sym', numeric: false, label: 'SYM' },
-  { id: 'yoprice', numeric: true, label: 'Open' },
-  { id: 'ycprice', numeric: true, label: 'Close' },
-  { id: 'ymaxp', numeric: true, label: 'High' },
-  { id: 'yminp', numeric: true, label: 'Low' },
+  { id: 'yoprice', numeric: true, label: 'Open ($)' },
+  { id: 'ycprice', numeric: true, label: 'Close ($)' },
+  { id: 'ymaxp', numeric: true, label: 'High ($)' },
+  { id: 'yminp', numeric: true, label: 'Low ($)' },
 ];
 
 const headCellOne = [
@@ -250,13 +250,14 @@ function EnhancedTableHead(props) {
   };
 
   return (
-    <TableHead>
+    <TableHead className="table2">
       <TableRow>
         {headCellSort.map((headCell) => (
           <TableCell
             key={headCell.id}
             align={'right'}
             padding={'default'}
+            className={"table2"}
           >
             <TableSortLabel
               active={orderBy === headCell.id}
@@ -343,10 +344,10 @@ export default function YestEnhancedTable({ data }) {
               return (
                 <TableRow>
                   <TableCell align="right">{row.sym}</TableCell>
-                  <TableCell align="right">${row.yoprice.toFixed(2)}</TableCell>
-                  <TableCell align="right">${row.ycprice.toFixed(2)}</TableCell>
-                  <TableCell align="right">${row.ymaxp.toFixed(2)}</TableCell>
-                  <TableCell align="right">${row.yminp.toFixed(2)}</TableCell>
+                  <TableCell align="right">{row.yoprice.toFixed(2)}</TableCell>
+                  <TableCell align="right">{row.ycprice.toFixed(2)}</TableCell>
+                  <TableCell align="right">{row.ymaxp.toFixed(2)}</TableCell>
+                  <TableCell align="right">{row.yminp.toFixed(2)}</TableCell>
                   {(row.yoprice - row.ycprice) > 0 ? (
                     <TableCell align="right">
                       <svg width="25" height="25" viewBox="0 0 16 16" class="bi bi-caret-down-fill" fill="red" xmlns="http://www.w3.org/2000/svg">

@@ -22,7 +22,12 @@ li {
 .DailyChange{
   padding:0 !important;
   margin-left: 1px;
-  width:130px
+  width:130px;
+  font-size:1rem;
+}
+
+.MuiTableCell-root.MuiTableCell-head.DailyChange.MuiTableCell-alignRight{
+  font-size:1rem;
 }
 
 .Arrows{
@@ -35,14 +40,37 @@ li {
   
 }
 
+.tab-pane.container.active.table1{
+  margin-left:20px;
+  border:0px;
+}
+
+.tab-pane.container.fade.table2.actove.show {
+  margin-left:40px;
+}
+.rowTitleTable1{
+  margin-top:20px;
+  width:100%;
+  padding-left:400px
+}
+
+.rowTitleTable{
+  margin-top:20px;
+  width:100%;
+}
 .effect7{
   position:relative;
   box-shadow:0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) ;
+  padding-top:15px;
+    padding-left:15px;
+    padding-right:30px;
+    padding-bottom:15px;
+    /* width:70% */
 }
 
-.ExtraColumn{
+/* .ExtraColumn{
   width:30px
-}
+} */
 
 .MuiPaper-root.MuiMenu-paper.MuiPopover-paper.MuiPaper-elevation8.MuiPaper-rounded {
   width:10px
@@ -55,7 +83,33 @@ li {
 caption {
   color: black;
 }
+td.MuiTableCell-root{
+  padding:0px;
+  font-size:1em;
+}
 
+td.MuiTableCell-root.MuiTableCell-body.MuiTableCell-alignRight{
+  padding:30px;
+  font-size:1rem;
+  letter-spacing: 0em;
+}
+
+span.MuiButtonBase-root.MuiTableSortLabel-root{
+  font-size:1rem;
+}
+
+td.MuiTableRow-root.MuiTableRow-head{
+  padding:30px;
+  font-size:2rem;
+}
+
+.MuiTableCell-root.MuiTableCell-head.table2.MuiTableCell-alignRight{
+  padding-right:25px;
+}
+
+.MuiTableCell-root.MuiTableCell-head.table3.MuiTableCell-alignRight{
+  padding-right:25px;
+}
 
 
 

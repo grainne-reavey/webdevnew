@@ -2,3 +2,20 @@
     margin-top: 1px;
     margin-bottom: 1px;
 }
+
+.navbar-custom {
+    background-color: #7097BB;
+}
+
+.navbar-custom .navbar-brand,
+.navbar-custom .navbar-text {
+    color:white;
+}
+
+.navbar-brand > img {
+    height: auto;
+    width: auto;
+    max-height: 50px;
+    max-width: 200px;
+
+  }

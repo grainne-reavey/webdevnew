@@ -260,17 +260,37 @@ function stableSort(array, comparator) {
   return stabilizedThis.map((el) => el[0]);
 }
 
+function nFormatter(num, digits) {
+  var si = [
+    { value: 1, symbol: "" },
+    { value: 1E3, symbol: " k" },
+    { value: 1E6, symbol: " " },
+    { value: 1E9, symbol: " G" },
+    { value: 1E12, symbol: " T" },
+    { value: 1E15, symbol: " P" },
+    { value: 1E18, symbol: " E" }
+  ];
+  var rx = /\.0+$|(\.[0-9]*[1-9])0+$/;
+  var i;
+  for (i = si.length - 1; i > 0; i--) {
+    if (num >= si[i].value) {
+      break;
+    }
+  }
+  return (num / si[i].value).toFixed(digits).replace(rx, "$1") + si[i].symbol;
+}
+
 
 const headCells = [
   { id: 'colourarrow', numeric: false, lable: 'ca' },
   { id: 'sym', numeric: false, label: 'SYM' },
-  { id: 'price', numeric: true, label: 'Price' },
-  { id: 'diff', numeric: true, label: 'Change' },
-  { id: 'maxp', numeric: true, label: 'High' },
+  { id: 'price', numeric: true, label: 'Price ($)' },
+  { id: 'diff', numeric: true, label: 'Change (%)' },
+  { id: 'maxp', numeric: true, label: 'High ($)' },
   { id: 'maxt', numeric: true, label: 'Max Price Time' },
-  { id: 'minp', numeric: true, label: 'Low' },
+  { id: 'minp', numeric: true, label: 'Low ($)' },
   { id: 'mint', numeric: true, label: 'Min Price Time' },
-  { id: 'volume', numeric: true, label: 'Volume' },
+  { id: 'volume', numeric: true, label: 'Volume (Mill) ' },
 ];
 
 function EnhancedTableHead(props) {
@@ -314,14 +334,17 @@ EnhancedTableHead.propTypes = {
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    width: '100%',
+    width: '135%',
   },
   paper: {
-    width: '100%',
+    width: '135%',
     marginBottom: theme.spacing(4),
   },
   table: {
     minWidth: 750,
+  },
+  typography: {
+    fontSize: 12,
   },
   visuallyHidden: {
     border: 0,
@@ -359,25 +382,7 @@ export default function TodayEnhancedTable({ data }) {
     setPage(0);
   };
 
-  function nFormatter(num, digits) {
-    var si = [
-      { value: 1, symbol: "" },
-      { value: 1E3, symbol: " k" },
-      { value: 1E6, symbol: " M" },
-      { value: 1E9, symbol: " G" },
-      { value: 1E12, symbol: " Trillion" },
-      { value: 1E15, symbol: " P" },
-      { value: 1E18, symbol: " E" }
-    ];
-    var rx = /\.0+$|(\.[0-9]*[1-9])0+$/;
-    var i;
-    for (i = si.length - 1; i > 0; i--) {
-      if (num >= si[i].value) {
-        break;
-      }
-    }
-    return (num / si[i].value).toFixed(digits).replace(rx, "$1") + si[i].symbol;
-  }
+  
 
   var d = new moment();
 
@@ -385,7 +390,7 @@ export default function TodayEnhancedTable({ data }) {
     <div className={classes.root}>
       <Paper className={classes.paper}></Paper>
       <TableContainer>
-        <Table className={classes.table} aria-labelledby="tableTitle" size={'medium'} aria-label="caption table">
+        <Table className={classes.table} aria-labelledby="tableTitle" size={'large'} aria-label="caption table">
           <caption color="black">Last Updated:{d.format("HH:mm:ss")}</caption>
           <EnhancedTableHead classes={classes} numSelected={selected.length} order={order} orderBy={orderBy} onRequestSort={handleRequestSort} rowCount={data.length} />
           {(data.length > 0) ? (
@@ -412,13 +417,14 @@ export default function TodayEnhancedTable({ data }) {
                         </svg></TableCell>
                     ) : null}
                     <TableCell align="right">{row.sym}</TableCell>
-                    <TableCell align="right">${row.price.toFixed(2)}</TableCell>
-                    <TableCell align="right">{row.diff.toFixed(2)}%</TableCell>
-                    <TableCell align="right">${row.maxp.toFixed(2)}</TableCell>
+                    <TableCell align="right">{row.price.toFixed(2)}</TableCell>
+                    <TableCell align="right">{row.diff.toFixed(2)}</TableCell>
+                    <TableCell align="right">{row.maxp.toFixed(2)}</TableCell>
                     <TableCell align="right">{row.maxt.slice(11, 19)}</TableCell>
-                    <TableCell align="right">${row.minp.toFixed(2)}</TableCell>
+                    <TableCell align="right">{row.minp.toFixed(2)}</TableCell>
                     <TableCell align="right">{row.mint.slice(11, 19)}</TableCell>
                     <TableCell align="right">{nFormatter(row.volume, 2)} </TableCell>
+                    <TableCell>   </TableCell>
                   </TableRow>
                 );
               })}
@@ -432,6 +438,7 @@ export default function TodayEnhancedTable({ data }) {
                 <TableCell><h5>Loading...</h5></TableCell>
                 <TableCell> </TableCell>
                 <TableCell> </TableCell>
+                <TableCell></TableCell>
                 <TableCell></TableCell>
               </TableBody>
             )}
