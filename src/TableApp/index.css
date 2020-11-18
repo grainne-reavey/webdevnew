@@ -51,7 +51,7 @@ li {
 .rowTitleTable1{
   margin-top:20px;
   width:100%;
-  padding-left:400px
+  padding-left:385px
 }
 
 .rowTitleTable{
@@ -78,6 +78,10 @@ li {
 
 .MuiPaper-root.MuiMenu-paper.MuiPopover-paper.MuiPaper-elevation8.MuiPaper-rounded {
   width:10px
+}
+
+.MuiFormControl-root.MuiTextField-root{
+  padding-bottom:50px;
 }
 
 .MuiTableCell-root {

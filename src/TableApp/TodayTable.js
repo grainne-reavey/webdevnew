@@ -233,6 +233,8 @@ import TableSortLabel from '@material-ui/core/TableSortLabel';
 import Paper from '@material-ui/core/Paper';
 import { borders } from '@material-ui/system'
 import moment from 'moment';
+import { TextField } from '@material-ui/core';
+
 
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
@@ -382,20 +384,27 @@ export default function TodayEnhancedTable({ data }) {
     setPage(0);
   };
 
-  
-
   var d = new moment();
+
+  const [q, setQ] = React.useState("");
+
+  function search(rows) {
+    return rows.filter((row) => row.sym.toLowerCase().indexOf(q.toLowerCase())>-1)
+  }
+  
+  const filteredData = search(data)
 
   return (
     <div className={classes.root}>
       <Paper className={classes.paper}></Paper>
+      <TextField id="filled-basic" variant="filled" label="Search" value={q} onChange={(e) => setQ(e.target.value)}/>
       <TableContainer>
         <Table className={classes.table} aria-labelledby="tableTitle" size={'large'} aria-label="caption table">
           <caption color="black">Last Updated:{d.format("HH:mm:ss")}</caption>
           <EnhancedTableHead classes={classes} numSelected={selected.length} order={order} orderBy={orderBy} onRequestSort={handleRequestSort} rowCount={data.length} />
           {(data.length > 0) ? (
             <TableBody>
-              {stableSort(data, getComparator(order, orderBy)).slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row, index) => {
+              {stableSort(filteredData, getComparator(order, orderBy)).slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row, index) => {
                 return (
                   <TableRow>
                     {row.diff < 0 ? (

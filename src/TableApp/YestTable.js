@@ -204,6 +204,7 @@ import TablePagination from '@material-ui/core/TablePagination';
 import TableRow from '@material-ui/core/TableRow';
 import TableSortLabel from '@material-ui/core/TableSortLabel';
 import Paper from '@material-ui/core/Paper';
+import { TextField } from '@material-ui/core';
 
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
@@ -328,19 +329,28 @@ export default function YestEnhancedTable({ data }) {
     setPage(newPage);
   };
 
+  const [q, setQ] = React.useState("");
+
   const handleChangeRowsPerPage = (event) => {
     setRowsPerPage(parseInt(event.target.value, 10));
     setPage(0);
   };
 
+  function search(rows) {
+    return rows.filter((row) => row.sym.toLowerCase().indexOf(q.toLowerCase())>-1)
+}
+
+  const filteredData = search(data)
+
   return (
     <div className={classes.root}>
       <Paper className={classes.paper}></Paper>
+      <TextField id="filled-basic" variant="filled" label="Search" value={q} onChange={(e) => setQ(e.target.value)}/>
       <TableContainer>
         <Table className={classes.table} aria-labelledby="tableTitle" size={'medium'} aria-label="enhanced table">
           <EnhancedTableHead classes={classes} numSelected={selected.length} order={order} orderBy={orderBy} onRequestSort={handleRequestSort} rowCount={data.length} />
           {(data.length > 0) ? (
-            <TableBody>{stableSort(data, getComparator(order, orderBy)).slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row, index) => {
+            <TableBody>{stableSort(filteredData, getComparator(order, orderBy)).slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row, index) => {
               return (
                 <TableRow>
                   <TableCell align="right">{row.sym}</TableCell>
