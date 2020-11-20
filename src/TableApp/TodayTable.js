@@ -397,7 +397,7 @@ export default function TodayEnhancedTable({ data }) {
   return (
     <div className={classes.root}>
       <Paper className={classes.paper}></Paper>
-      <TextField id="filled-basic" variant="filled" label="Search" value={q} onChange={(e) => setQ(e.target.value)}/>
+      <TextField id="filled-basic" variant="filled" label="Search Sym" value={q} onChange={(e) => setQ(e.target.value)}/>
       <TableContainer>
         <Table className={classes.table} aria-labelledby="tableTitle" size={'large'} aria-label="caption table">
           <caption color="black">Last Updated:{d.format("HH:mm:ss")}</caption>
@@ -432,7 +432,7 @@ export default function TodayEnhancedTable({ data }) {
                     <TableCell align="right">{row.maxt.slice(11, 19)}</TableCell>
                     <TableCell align="right">{row.minp.toFixed(2)}</TableCell>
                     <TableCell align="right">{row.mint.slice(11, 19)}</TableCell>
-                    <TableCell align="right">{nFormatter(row.volume, 2)} </TableCell>
+                    <TableCell align="right">{(row.volume/1000000).toFixed(2)} </TableCell>
                     <TableCell>   </TableCell>
                   </TableRow>
                 );
