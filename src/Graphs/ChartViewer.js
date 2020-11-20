@@ -235,6 +235,14 @@ const dataFetch =
 }, {
   "name": "USD($)",
   "type": "number",
+  style: {
+    title: {
+      "font-size": "20",
+    },
+    "label-major": {
+      "font-size": "15",
+    },
+  },
   format:{
       prefix: "",
       round: "2"
@@ -258,14 +266,14 @@ const dataSource = {
     {
       plot: [
         {
-          value: "Running Average Price",
+          value: "USD($)",
           connectnulldata: "1",
         }
       ],
-      title: "Running Average Price",
+      title: "USD($)",
       style: {
         title: {
-          "font-size": "20",
+          "font-size": "19",
         },
         "label-major": {
           "font-size": "15",
@@ -310,7 +318,7 @@ export default class ChartViewer extends React.Component {
         id: "mychart",
         type: "timeseries",
         renderAt: "container",
-        width: "800",
+        width: "750",
         height: "600",
         "useMessageLog":"1",
         "showRTMenuItem": "1",
